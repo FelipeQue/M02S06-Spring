@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 public class PetController {
 
     @PostMapping()
-    public String add(@RequestBody Pet pet) {
+    public String add() {
         return "Cadastrar foi chamado.";
     }
 
@@ -30,7 +30,7 @@ public class PetController {
     }
 
     @PutMapping
-    public String update(@RequestBody Pet pet) {
+    public String update() {
         return "Atualizar foi chamado.";
     }
 

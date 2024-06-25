@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 public class GuardianController {
 
     @PostMapping()
-    public String add(@RequestBody Guardian guardian) {
+    public String add() {
         return "Cadastrar foi chamado.";
     }
 
@@ -29,7 +29,7 @@ public class GuardianController {
     }
 
     @PutMapping
-    public String update(@RequestBody Guardian guardian) {
+    public String update() {
         return "Atualizar foi chamado.";
     }
 }
