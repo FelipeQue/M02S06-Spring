@@ -1,17 +1,14 @@
 package br.senai.lab365.Petshop.models;
 
-import java.time.LocalDate;
-import java.util.Map;
-
 public class Pet {
 
     private long id;
     private String name;
     private String species;
+    private String sex;
     private String breed;
     private double weight;
     private String birthDate;
-    private Map<LocalDate, Double> weightHistory;
 
     public long getId() {
         return id;
@@ -35,6 +32,14 @@ public class Pet {
 
     public void setSpecies(String species) {
         this.species = species;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public String getBreed() {
@@ -61,11 +66,4 @@ public class Pet {
         this.birthDate = birthDate;
     }
 
-    public Map<LocalDate, Double> getWeightHistory() {
-        return weightHistory;
-    }
-
-    public void setWeightHistory(Map<LocalDate, Double> weightHistory) {
-        this.weightHistory = weightHistory;
-    }
 }
