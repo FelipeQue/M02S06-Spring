@@ -33,7 +33,12 @@ public class PetController {
 
     @GetMapping("/{id}")
     public Pet search(@PathVariable long id) {
-        return petService.search(id);
+        Pet pet = petService.search(id);
+        if (pet != null) {
+            return  pet;
+        } else {
+            throw new RuntimeException("404");
+        }
     }
 
     @DeleteMapping("/{id}")
@@ -44,8 +49,8 @@ public class PetController {
     }
 
     @PutMapping("/{id}")
-    public Pet update(@PathVariable long id, @RequestBody Pet petAtualizado) {
-        Pet pet = petService.update(id, petAtualizado);
+    public Pet update(@PathVariable long id, @RequestBody Pet updatedPet) {
+        Pet pet = petService.update(id, updatedPet);
         if (pet != null) {
             return pet;
         } else {
