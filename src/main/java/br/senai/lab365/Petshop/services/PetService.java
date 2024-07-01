@@ -20,11 +20,6 @@ public class PetService {
         this.guardianRepository = guardianRepository;
     }
 
-    public Pet add(Pet pet) {
-        petRepository.add(pet);
-        return pet;
-    }
-
     public List<Pet> list() {
         return petRepository.list();
     }
@@ -42,8 +37,8 @@ public class PetService {
         return false;
     }
 
-    public Pet update(long id, Pet pet) {
-        var petToBeUpdated = petRepository.search(pet.getId());
+    public Pet update(long id, PetRequest pet) {
+        var petToBeUpdated = petRepository.search(id);
         if (petToBeUpdated != null) {
             petToBeUpdated.setName(pet.getName());
             petToBeUpdated.setSpecies(pet.getSpecies());
@@ -51,13 +46,15 @@ public class PetService {
             petToBeUpdated.setBreed(pet.getBreed());
             petToBeUpdated.setWeight(pet.getWeight());
             petToBeUpdated.setBirthDate(pet.getBirthDate());
+            Guardian guardian = guardianRepository.search(pet.getGuardianId());
+            petToBeUpdated.setGuardian(guardian);
             return petToBeUpdated;
         } else {
             return null;
         }
     }
 
-    public Pet savePet (PetRequest request) {
+    public Pet add (PetRequest request) {
         Pet petToBeSaved = new Pet();
         petToBeSaved.setName(request.getName());
         petToBeSaved.setSpecies(request.getSpecies());
@@ -69,16 +66,6 @@ public class PetService {
         petToBeSaved.setGuardian(guardian);
         petRepository.add(petToBeSaved);
         return petToBeSaved;
-    }
-
-
-    public boolean setGuardian(long petId, long guardianId){
-        Pet pet = petRepository.search(petId);
-        Guardian guardian = guardianRepository.search(guardianId);
-        if (pet != null && guardian != null) {
-            return petRepository.setGuardian(petId, guardian);
-        }
-        return false;
     }
 
 }

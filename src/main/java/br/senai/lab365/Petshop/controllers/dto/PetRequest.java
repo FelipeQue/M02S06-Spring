@@ -8,6 +8,8 @@ public class PetRequest {
     private String species;
     private String sex;
     private String breed;
+    private double weight;
+    private String birthDate;
 
     public String getSex() {
         return sex;
@@ -40,9 +42,6 @@ public class PetRequest {
     public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
-
-    private double weight;
-    private String birthDate;
 
     public long getId() {
         return id;

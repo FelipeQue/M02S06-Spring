@@ -30,14 +30,5 @@ public class PetRepository {
         return pets.stream().filter(pet -> id == pet.getId()).findFirst().orElse(null);
     }
 
-    public boolean setGuardian(long petId, Guardian guardian) {
-        Pet pet = this.search(petId);
-        if (pet != null) {
-            pet.setGuardian(guardian);
-            return true;
-        }
-        return false;
-
-    }
 
 }

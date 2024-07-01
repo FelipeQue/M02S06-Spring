@@ -23,7 +23,7 @@ public class PetController {
 
     @PostMapping()
     public Pet add(@RequestBody PetRequest pet) {
-        return petService.savePet(pet);
+        return petService.add(pet);
     }
 
     @GetMapping()
@@ -54,7 +54,7 @@ public class PetController {
     }
 
     @PutMapping("/{id}")
-    public Pet update(@PathVariable long id, @RequestBody Pet updatedPet) {
+    public Pet update(@PathVariable long id, @RequestBody PetRequest updatedPet) {
         Pet pet = petService.update(id, updatedPet);
         if (pet != null) {
             return pet;
