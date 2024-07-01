@@ -1,6 +1,9 @@
 package br.senai.lab365.Petshop.services;
 
+import br.senai.lab365.Petshop.controllers.dto.PetRequest;
+import br.senai.lab365.Petshop.models.Guardian;
 import br.senai.lab365.Petshop.models.Pet;
+import br.senai.lab365.Petshop.repositories.GuardianRepository;
 import br.senai.lab365.Petshop.repositories.PetRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +13,11 @@ import java.util.List;
 public class PetService {
 
     private final PetRepository petRepository;
+    private final GuardianRepository guardianRepository;
 
-    public PetService(PetRepository petRepository) {
+    public PetService(PetRepository petRepository, GuardianRepository guardianRepository) {
         this.petRepository = petRepository;
+        this.guardianRepository = guardianRepository;
     }
 
     public Pet add(Pet pet) {
@@ -50,7 +55,30 @@ public class PetService {
         } else {
             return null;
         }
+    }
 
+    public Pet savePet (PetRequest request) {
+        Pet petToBeSaved = new Pet();
+        petToBeSaved.setName(request.getName());
+        petToBeSaved.setSpecies(request.getSpecies());
+        petToBeSaved.setBreed(request.getBreed());
+        petToBeSaved.setSex(request.getSex());
+        petToBeSaved.setWeight(request.getWeight());
+        petToBeSaved.setBirthDate(request.getBirthDate());
+        Guardian guardian = guardianRepository.search(request.getGuardianId());
+        petToBeSaved.setGuardian(guardian);
+        petRepository.add(petToBeSaved);
+        return petToBeSaved;
+    }
+
+
+    public boolean setGuardian(long petId, long guardianId){
+        Pet pet = petRepository.search(petId);
+        Guardian guardian = guardianRepository.search(guardianId);
+        if (pet != null && guardian != null) {
+            return petRepository.setGuardian(petId, guardian);
+        }
+        return false;
     }
 
 }

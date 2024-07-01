@@ -1,5 +1,6 @@
 package br.senai.lab365.Petshop.repositories;
 
+import br.senai.lab365.Petshop.models.Guardian;
 import br.senai.lab365.Petshop.models.Pet;
 import org.springframework.stereotype.Repository;
 
@@ -27,6 +28,16 @@ public class PetRepository {
 
     public Pet search(long id) {
         return pets.stream().filter(pet -> id == pet.getId()).findFirst().orElse(null);
+    }
+
+    public boolean setGuardian(long petId, Guardian guardian) {
+        Pet pet = this.search(petId);
+        if (pet != null) {
+            pet.setGuardian(guardian);
+            return true;
+        }
+        return false;
+
     }
 
 }

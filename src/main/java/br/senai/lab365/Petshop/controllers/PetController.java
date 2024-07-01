@@ -1,6 +1,9 @@
 package br.senai.lab365.Petshop.controllers;
 
+import br.senai.lab365.Petshop.controllers.dto.PetRequest;
+import br.senai.lab365.Petshop.models.Guardian;
 import br.senai.lab365.Petshop.models.Pet;
+import br.senai.lab365.Petshop.services.GuardianService;
 import br.senai.lab365.Petshop.services.PetService;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,14 +14,16 @@ import java.util.List;
 public class PetController {
 
     private final PetService petService;
+    private final GuardianService guardianService;
 
-    public PetController(PetService petService) {
+    public PetController(PetService petService, GuardianService guardianService) {
         this.petService = petService;
+        this.guardianService = guardianService;
     }
 
     @PostMapping()
-    public Pet add(@RequestBody Pet pet) {
-        return petService.add(pet);
+    public Pet add(@RequestBody PetRequest pet) {
+        return petService.savePet(pet);
     }
 
     @GetMapping()

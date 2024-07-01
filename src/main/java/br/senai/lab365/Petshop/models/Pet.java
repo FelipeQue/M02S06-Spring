@@ -4,6 +4,7 @@ public class Pet {
 
     private long id;
     private String name;
+    private Guardian guardian;
     private String species;
     private String sex;
     private String breed;
@@ -24,6 +25,14 @@ public class Pet {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Guardian getGuardian() {
+        return guardian;
+    }
+
+    public void setGuardian(Guardian guardian) {
+        this.guardian = guardian;
     }
 
     public String getSpecies() {
